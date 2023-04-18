@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
 // import { heroReducer } from './Store/Reducer/heroes.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { heroReducer } from './Store/Reducer/heroes.reducer';
 // import { HeroEffect } from './Store/hero.effect';
 
 @NgModule({
@@ -23,7 +25,8 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     HttpClientModule,
     // EffectsModule.forFeature([HeroEffect]),
-    // StoreModule.forRoot({heroData: heroReducer})
+    StoreModule.forRoot({heroReducer}),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,29 @@
-// import { Hero } from "src/app/interfaces/hero";
-// import { createReducer, on } from "@ngrx/store";
-// import { addHero, herosSuccess } from "../Actions/heroes.actions";
+export interface HeroState {
+    heros: Hero[];
+}
 
-// export const initialState: Array<Hero> = [];
-// export const heroReducer = createReducer(
-//     initialState,
-//     on(herosSuccess, (state, { allHeros }) => {
-//         return allHeros;
-//       })
-// )
+import { Hero } from "src/app/interfaces/hero";
+import { createReducer, on } from "@ngrx/store";
+import { addHero, loadHerosData } from "../Actions/heroes.actions";
+
+export const initialState:HeroState = {
+    heros: []
+}
+export const heroReducer = createReducer(
+    initialState,
+    on(loadHerosData, (state, action) => {
+
+       
+        return {...state, 
+            heros: [...state.heros, ...action.data]
+        }
+    }),
+    on(addHero, (state, action) => {
+
+       
+        return {...state, 
+            heros: [...state.heros, {id: Number(Date.now().toString()), name: action.name}]
+        }
+    })
+    
+)
